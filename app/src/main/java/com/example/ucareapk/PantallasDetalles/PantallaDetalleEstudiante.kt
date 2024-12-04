@@ -7,6 +7,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -32,7 +34,7 @@ fun DetalleEstudiante(navController: NavHostController, padding: PaddingValues) 
             horizontalArrangement = Arrangement.Start
         ) {
             TextButton(
-                onClick = { navController.popBackStack() },
+                onClick = { navController.navigate("pantallaHomePsicologo") },
                 modifier = Modifier
                     .height(48.dp)
                     .padding(horizontal = 16.dp)
@@ -53,15 +55,20 @@ fun DetalleEstudiante(navController: NavHostController, padding: PaddingValues) 
             shape = RoundedCornerShape(12.dp),
             colors = CardDefaults.cardColors(containerColor = Color(0xFFD5E8C8))
         ) {
-
-            Text(
-                text = "Detalles",
-                fontSize = 32.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color(0xFF6D6D6D),
-                modifier = Modifier.padding(16.dp)
-
-            )
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally, // Centrar horizontalmente
+                verticalArrangement = Arrangement.Center // Centrar verticalmente
+            ) {
+                Text(
+                    text = "Detalles",
+                    fontSize = 32.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black
+                )
+            }
         }
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -71,12 +78,14 @@ fun DetalleEstudiante(navController: NavHostController, padding: PaddingValues) 
         Spacer(modifier = Modifier.height(16.dp))
 
         // Historial de sesiones
-        SesionHistorial()
+        SesionHistorial(navController)
     }
 }
 
 @Composable
 fun EstudianteInfo(navController: NavHostController) {
+    var notas = remember { mutableStateListOf("Mejor manejo del estrés", "Continuar con técnicas de afrontamiento", "Preparar lista de prioridades") }
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -108,9 +117,24 @@ fun EstudianteInfo(navController: NavHostController) {
 
         // Notas
         Text(text = "Notas:", fontWeight = FontWeight.Bold)
-        Text(text = "- Mejor manejo del estrés")
-        Text(text = "- Continuar con técnicas de afrontamiento")
-        Text(text = "- Preparar lista de prioridades")
+        notas.forEachIndexed { index, nota ->
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(text = "- $nota")
+                IconButton(onClick = { notas.removeAt(index) }) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.delete), // Reemplaza con tu ícono
+                        contentDescription = "Eliminar nota",
+                        tint = Color.Black,
+                        modifier = Modifier.size(22.dp)
+
+                    )
+                }
+            }
+        }
         Spacer(modifier = Modifier.height(8.dp))
         Button(
             onClick = { navController.navigate("AgregarNota") },
@@ -120,6 +144,60 @@ fun EstudianteInfo(navController: NavHostController) {
         }
     }
 }
+
+@Composable
+fun SesionHistorial(navController: NavHostController) {
+    Column(modifier = Modifier.fillMaxWidth()) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 8.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "Historial de sesiones",
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp
+            )
+            IconButton(onClick = { navController.navigate("AgregarSesion") }) {
+                Icon(
+                    painter = painterResource(id = R.drawable.plus), // Reemplaza con tu ícono
+                    contentDescription = "Agregar sesión",
+                    tint = Color(0xFF6D6D6D)
+                )
+            }
+        }
+
+        LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            items(3) { index ->
+                SesionCard(
+                    titulo = when (index) {
+                        0 -> "Manejo del estrés"
+                        1 -> "Problemas académicos"
+                        else -> "Dificultades familiares"
+                    },
+                    fecha = when (index) {
+                        0 -> "01/11/2024"
+                        1 -> "11/11/2024"
+                        else -> "18/11/2024"
+                    },
+                    descripcion = when (index) {
+                        0 -> "Se discutieron técnicas de relajación."
+                        1 -> "El estudiante expresó preocupación por exámenes."
+                        else -> "Se exploraron conflictos familiares."
+                    },
+                    duracion = when (index) {
+                        0 -> "50 min"
+                        1 -> "45 min"
+                        else -> "60 min"
+                    }
+                )
+            }
+        }
+    }
+}
+
 @Composable
 fun SesionHistorial() {
     Column(modifier = Modifier.fillMaxWidth()) {

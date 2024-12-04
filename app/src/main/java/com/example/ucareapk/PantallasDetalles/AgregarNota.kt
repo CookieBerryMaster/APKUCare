@@ -106,7 +106,7 @@ fun NotaScreen(navController: NavHostController) {
 
         // Botón de confirmar
         Button(
-            onClick = { /* Acción de guardar nota */ },
+            onClick = { navController.navigate("PantallaDetalle") },
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4CAF50)),
             modifier = Modifier
                 .size(width = 80.dp, height = 50.dp)
