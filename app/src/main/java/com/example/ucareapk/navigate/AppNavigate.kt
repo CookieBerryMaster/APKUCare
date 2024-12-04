@@ -5,6 +5,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.ucareapk.pantallaCitas.CitasEdicion
+import com.example.ucareapk.pantallaCitas.CitasPsicologo
 import com.example.ucareapk.pantallaEstadoAnimo.PantallaEstadoAnimo
 import com.example.ucareapk.pantallaEstadoAnimo.RegistroAnimo
 import com.example.ucareapk.pantallasActividad.CrearActividad
@@ -13,6 +15,7 @@ import com.example.ucareapk.pantallasRecordatorio.AgregarRecordatorio
 import com.example.ucareapk.pantallasRecordatorio.PantallaRecordatorio
 import com.example.ucareapk.pantallasRecordatorio.Recordatorios
 import com.example.ucareapk.pantallasinicio.PantallaHome
+import com.example.ucareapk.pantallasinicio.PantallaHomePsicologo
 import com.example.ucareapk.pantallasinicio.PantallaInicio
 import com.example.ucareapk.pantallasinicio.PantallaSignUp
 
@@ -30,14 +33,19 @@ fun AppNavigate() {
     es importante aclarar que si tiene una navegacion a una funcion extra no coloques el paddinfvalues, por que si no la app se cierra
     (puedes guiarte del ejemplo de abajo)
      ---------------------------------------------------------------------*/
-    /*NavHost(navController = navController, startDestination = "PantallaDetalle") {
-        composable("PantallaDetalle") { DetalleEstudiante(navController, PaddingValues()) }
-        composable("AgregarNota") { NotaScreen(navController)}
+   /* NavHost(navController = navController, startDestination = "PantallaDetalle") {
+        composable("PantallaDetalle") { CitasPsicologo(navController, PaddingValues()) }
+        composable("EdicionCitas") { CitasEdicion(navController) }
    }*/
 
     NavHost(navController = navController, startDestination = "pantallaInicio") {
         // Pantalla de inicio de sesion
-        composable("pantallaInicio") { PantallaInicio(onNavigateToSignUp = { navController.navigate("pantallaSignUp") }) }
+        composable("pantallaInicio") {
+            PantallaInicio(
+                onNavigateToSignUp = { navController.navigate("pantallaSignUp") },
+                onNavigateToHomePsicologo = { navController.navigate("pantallaHomePsicologo") } // Nuevo callback
+            )
+        }
         // Pantalla de registro de usuario
         composable("pantallaSignUp") { PantallaSignUp(navController) }
         // Home para estudiantes
@@ -56,6 +64,11 @@ fun AppNavigate() {
         composable("estadoanimo") { PantallaEstadoAnimo(navController = navController, padding = PaddingValues())  }
         //Nuevo Estado de animo
         composable("NuevoAnimo") { RegistroAnimo(navController) }
+
+        //Para el psicologo
+        composable("pantallaHomePsicologo") { PantallaHomePsicologo(navController) }
+        composable("PantallaCitas") { CitasPsicologo(navController, PaddingValues()) }
+        composable("EdicionCitas") { CitasEdicion(navController) }
     }
 
     /*NavHost(navController = navController, startDestination = "home") {

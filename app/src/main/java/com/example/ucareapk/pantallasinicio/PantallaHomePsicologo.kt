@@ -34,7 +34,7 @@ import com.example.ucareapk.R
 import com.example.ucareapk.ui.theme.dmsansFamily
 
 @Composable
-fun PantallaHomePsicologo( modifier: Modifier = Modifier) {
+fun PantallaHomePsicologo(navController: NavController, modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -53,7 +53,7 @@ fun PantallaHomePsicologo( modifier: Modifier = Modifier) {
                 contentDescription = "IconHome",
                 modifier = Modifier
                     .size(21.dp)
-                // la navegaciooon
+                    .clickable { navController.popBackStack() }
             )
             Image(
                 painter = painterResource(id = R.drawable.iconrecordatorio),
@@ -461,11 +461,13 @@ fun PantallaHomePsicologo( modifier: Modifier = Modifier) {
                         fontFamily = dmsansFamily,
                         fontSize = 18.sp),
                     modifier = Modifier
+                        .clickable { navController.navigate("PantallaCitas") }
                         .align(alignment = Alignment.TopStart)
                         .offset(x = 245.dp,
                             y = 6.dp)
                         .requiredWidth(width = 91.dp)
                         .requiredHeight(height = 19.dp))
+
                 Text(
                     text = "Citas de hoy",
                     color = Color.Black,
