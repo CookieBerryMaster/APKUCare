@@ -8,6 +8,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.ucareapk.PantallasDetalles.DetalleEstudiante
 import com.example.ucareapk.pantallaCitas.CitasEdicion
 import com.example.ucareapk.pantallaCitas.CitasPsicologo
 import com.example.ucareapk.pantallaEstadoAnimo.PantallaEstadoAnimo
@@ -49,7 +50,7 @@ fun AppNavigate() {
             PantallaInicio(
                 onNavigateToSignUp = { navController.navigate("pantallaSignUp") },
                 onNavigateToHomePsicologo = { navController.navigate("pantallaHomePsicologo") },
-                onNavigateToLogin = {navController.navigate("pantallaLogin")}// Nuevo callback
+                onNavigateToLogin = {navController.navigate("pantallaLogin")},
             )
         }
         // Pantalla login
@@ -81,6 +82,7 @@ fun AppNavigate() {
         composable("pantallaHomePsicologo") { PantallaHomePsicologo(navController) }
         composable("PantallaCitas") { CitasPsicologo(navController, PaddingValues()) }
         composable("EdicionCitas") { CitasEdicion(navController) }
+        composable("PantallaDetalle") { DetalleEstudiante(navController, PaddingValues()) }
     }
 
     /*NavHost(navController = navController, startDestination = "home") {

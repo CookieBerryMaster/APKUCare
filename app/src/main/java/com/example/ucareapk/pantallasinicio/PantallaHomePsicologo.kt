@@ -34,7 +34,9 @@ import com.example.ucareapk.R
 import com.example.ucareapk.ui.theme.dmsansFamily
 
 @Composable
-fun PantallaHomePsicologo(navController: NavController, modifier: Modifier = Modifier) {
+fun PantallaHomePsicologo(
+    navController: NavController,
+    modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -65,7 +67,7 @@ fun PantallaHomePsicologo(navController: NavController, modifier: Modifier = Mod
                 painter = painterResource(id = R.drawable.iconactividades),
                 contentDescription = "IconActividades",
                 modifier = Modifier.size(21.dp)
-
+                    .clickable {  navController.navigate("PantallaDetalle") }
             )
             Image(
                 painter = painterResource(id = R.drawable.ajustes),
