@@ -1,5 +1,7 @@
 package com.example.ucareapk.navigate
 
+import ExportarDatosScreen
+import ReporteMensualScreen
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
@@ -70,6 +72,10 @@ fun AppNavigate() {
         composable("estadoanimo") { PantallaEstadoAnimo(navController = navController, padding = PaddingValues())  }
         //Nuevo Estado de animo
         composable("NuevoAnimo") { RegistroAnimo(navController) }
+
+
+        composable("statsScreen"){ReporteMensualScreen(navController)}
+        composable("xportScreen"){ExportarDatosScreen(navController)}
 
         //Para el psicologo
         composable("pantallaHomePsicologo") { PantallaHomePsicologo(navController) }
