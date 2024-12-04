@@ -7,6 +7,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.ucareapk.PantallasDetalles.DetalleEstudiante
+import com.example.ucareapk.PantallasDetalles.HistorialScreen
+import com.example.ucareapk.PantallasDetalles.NotaScreen
 import com.example.ucareapk.pantallaCitas.CitasEdicion
 import com.example.ucareapk.pantallaCitas.CitasPsicologo
 import com.example.ucareapk.pantallaEstadoAnimo.PantallaEstadoAnimo
@@ -77,6 +79,8 @@ fun AppNavigate() {
         composable("PantallaCitas") { CitasPsicologo(navController, PaddingValues()) }
         composable("EdicionCitas") { CitasEdicion(navController) }
         composable("PantallaDetalle") { DetalleEstudiante(navController, PaddingValues()) }
+        composable("AgregarNota") { NotaScreen(navController) }
+        composable("AgregarSesion") { HistorialScreen(navController) }
     }
 
     /*NavHost(navController = navController, startDestination = "home") {
