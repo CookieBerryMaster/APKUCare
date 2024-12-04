@@ -14,6 +14,7 @@ import com.example.ucareapk.pantallasActividad.PantallaActividad
 import com.example.ucareapk.pantallasRecordatorio.AgregarRecordatorio
 import com.example.ucareapk.pantallasRecordatorio.PantallaRecordatorio
 import com.example.ucareapk.pantallasRecordatorio.Recordatorios
+import com.example.ucareapk.pantallasinicio.FramePantallaLogIn
 import com.example.ucareapk.pantallasinicio.PantallaHome
 import com.example.ucareapk.pantallasinicio.PantallaHomePsicologo
 import com.example.ucareapk.pantallasinicio.PantallaInicio
@@ -43,9 +44,12 @@ fun AppNavigate() {
         composable("pantallaInicio") {
             PantallaInicio(
                 onNavigateToSignUp = { navController.navigate("pantallaSignUp") },
-                onNavigateToHomePsicologo = { navController.navigate("pantallaHomePsicologo") } // Nuevo callback
+                onNavigateToHomePsicologo = { navController.navigate("pantallaHomePsicologo") },
+                onNavigateToLogin = {navController.navigate("pantallaLogin")}// Nuevo callback
             )
         }
+        // Pantalla login
+        composable("pantallaLogin") { FramePantallaLogIn(navController) }
         // Pantalla de registro de usuario
         composable("pantallaSignUp") { PantallaSignUp(navController) }
         // Home para estudiantes

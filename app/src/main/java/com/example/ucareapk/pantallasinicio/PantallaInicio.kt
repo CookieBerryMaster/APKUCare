@@ -34,6 +34,7 @@ import com.example.ucareapk.ui.theme.dmsansFamily
 fun PantallaInicio(
     onNavigateToSignUp: () -> Unit,
     onNavigateToHomePsicologo: () -> Unit, // Nuevo callback
+    onNavigateToLogin: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -89,8 +90,9 @@ fun PantallaInicio(
                     modifier = Modifier
                         .align(alignment = Alignment.Center)
                         .offset(x = (-2).dp, y = 40.dp)
-                        .requiredWidth(width = 204.dp)
+                        .requiredWidth(width = 272.dp)
                         .requiredHeight(height = 24.dp)
+                        .clickable { onNavigateToLogin()}
                 )
             }
 
