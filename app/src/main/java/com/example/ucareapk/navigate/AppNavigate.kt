@@ -2,6 +2,7 @@ package com.example.ucareapk.navigate
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -10,6 +11,7 @@ import com.example.ucareapk.pantallaCitas.CitasPsicologo
 import com.example.ucareapk.pantallaEstadoAnimo.PantallaEstadoAnimo
 import com.example.ucareapk.pantallaEstadoAnimo.RegistroAnimo
 import com.example.ucareapk.pantallasActividad.CrearActividad
+import com.example.ucareapk.pantallasActividad.GestionDeCitaScreen
 import com.example.ucareapk.pantallasActividad.PantallaActividad
 import com.example.ucareapk.pantallasRecordatorio.AgregarRecordatorio
 import com.example.ucareapk.pantallasRecordatorio.PantallaRecordatorio
@@ -79,5 +81,25 @@ fun AppNavigate() {
         composable("home") { PantallaHome(navController) }
         composable("actividad") { PantallaActividad(navController, padding = PaddingValues()) }
     }*/
+    @Composable
+    fun RegistroCitaScreen(navController: NavHostController) {
+
+    }
+
+    fun HistorialScreen(navController: NavHostController) {
+
+    }
+
+    @Composable
+    fun AppNavigate() {
+        val navController = rememberNavController()
+
+        NavHost(navController = navController, startDestination = "gestionCitas") {
+            composable("gestionCitas") { GestionDeCitaScreen(navController) }
+            composable("registro") { RegistroCitaScreen(navController) }
+            composable("historial") { HistorialScreen(navController) }
+        }
+    }
+
 
 }
